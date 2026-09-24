@@ -22,8 +22,8 @@ const config = {
       xl: "1200px",
     },
     fontFamily: {
-      primary: "var(--font-marcellus)",
-      secondary: "var(--font-montserrat)",
+      primary: ["var(--font-assistant)", "var(--font-marcellus)", "sans-serif"],
+      secondary: ["var(--font-assistant)", "var(--font-montserrat)", "sans-serif"],
     },
     extend: {
       colors: {

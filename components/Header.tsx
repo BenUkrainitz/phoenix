@@ -12,13 +12,11 @@
  */
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { AiOutlineMenu } from "react-icons/ai";
-import { FaPhoneAlt } from "react-icons/fa";
-import { IoMdMail } from "react-icons/io";
+import { FaPhoneAlt, FaMapMarkerAlt } from "react-icons/fa";
 import { useCursor } from "@/context/CursorContext";
 // components
 import MobileNav from "./Nav/MobileNav";
@@ -33,89 +31,80 @@ const Header = () => {
 
   return (
     <>
-      {/* 
-        Fixed header that stays at top while scrolling
-        z-40 ensures it's above page content but below mobile nav (z-50)
-        Background color on mobile, transparent on desktop
-      */}
       <header className="pb-6 xl:pb-[50px] fixed z-40 w-full bg-accent-100 xl:bg-transparent">
         {/* top-bar */}
-        {/* 
-          Top contact bar with background color
-          Contains phone, email, and social media links
-        */}
         <div className="bg-secondary-100 mb-6 xl:mb-[50px] xl:h-[50px] py-4 xl:py-0">
           <div className="container mx-auto h-full">
             <div className="flex items-center justify-between h-full">
-              {/* phone & email */}
-              {/* 
-                Contact information section
-                Stacks vertically on mobile, horizontal on desktop
-                Responsive layout with gap adjustments
-              */}
+              {/* address & phone */}
               <motion.div
                 onMouseEnter={mouseEnterHandler}
                 onMouseLeave={mouseLeaveHandler}
                 className="flex flex-col lg:flex-row items-center h-full gap-2 xl:gap-6 w-full justify-between xl:w-auto xl:justify-normal"
               >
+                {/* address */}
+                <div className="flex items-center gap-2 text-white text-sm">
+                  <FaMapMarkerAlt className="text-white shrink-0" />
+                  <span>כיכר ז&apos;בוטינסקי 1, דימונה</span>
+                </div>
                 {/* phone */}
-                <div className="flex items-center gap-2 text-white">
-                  <FaPhoneAlt />
-                  <span>+99(0) 993 333 667</span>
-                </div>
-                {/* email */}
-                <div className="flex items-center gap-2 text-white">
-                  <IoMdMail />
-                  <span>info@youremail.com</span>
-                </div>
+                <a
+                  href="tel:0536100932"
+                  className="flex items-center gap-2 text-white text-sm hover:underline"
+                  dir="ltr"
+                >
+                  <FaPhoneAlt className="text-white shrink-0" />
+                  <span>053-6100932</span>
+                </a>
               </motion.div>
-              {/* socials */}
-              {/* Social media icons - hidden on mobile, visible on desktop */}
-              <motion.div
-                onMouseEnter={mouseEnterHandler}
-                onMouseLeave={mouseLeaveHandler}
-                className="hidden xl:block"
-              >
-                <Socials containerStyle="flex gap-6 text-white" />
-              </motion.div>
+              {/* socials & quick CTA */}
+              <div className="hidden xl:flex items-center gap-6">
+                <motion.div
+                  onMouseEnter={mouseEnterHandler}
+                  onMouseLeave={mouseLeaveHandler}
+                >
+                  <Socials containerStyle="flex gap-4 text-white" />
+                </motion.div>
+                <a
+                  href="https://wa.me/972536100932"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-accent hover:bg-[#e48373] text-white text-xs font-semibold px-4 py-1.5 rounded-full transition-colors shadow-sm"
+                >
+                  קבעי תור בוואטסאפ
+                </a>
+              </div>
             </div>
           </div>
         </div>
-        {/* 
-          Main header section with logo and navigation
-          Contains logo, mobile menu button, and desktop navigation
-        */}
+
+        {/* Main header section with logo and navigation */}
         <div className="container mx-auto flex items-center justify-between px-6">
           {/* logo */}
-          {/* Logo linking to home page - priority loading for performance */}
           <motion.div
             onMouseEnter={mouseEnterHandler}
             onMouseLeave={mouseLeaveHandler}
           >
-            <Link href="/">
-              <Image
-                src="/assets/logo.svg"
-                width={120}
-                height={44}
-                priority
-                alt=""
-              />
+            <Link href="/" className="flex items-center gap-2">
+              <div className="flex flex-col text-start">
+                <span className="text-2xl xl:text-3xl font-bold font-primary tracking-widest text-primary">
+                  PHOENIX
+                </span>
+                <span className="text-[12px] font-semibold text-accent -mt-1 tracking-normal">
+                  פניקס • קליניקה לאסתטיקה וקוסמטיקה
+                </span>
+              </div>
             </Link>
           </motion.div>
           {/* mobile nav trigger */}
-          {/* 
-            Hamburger menu button for mobile
-            Toggles mobile navigation panel visibility
-            Only visible on mobile/tablet (xl:hidden)
-          */}
           <div
             className="xl:hidden cursor-pointer"
             onClick={() => setMobileNav(!mobileNav)}
+            aria-label="פתח תפריט"
           >
             <AiOutlineMenu className="text-3xl text-primary" />
           </div>
           {/* desktop nav */}
-          {/* Desktop navigation menu - hidden on mobile, visible on desktop */}
           <motion.div
             onMouseEnter={mouseEnterHandler}
             onMouseLeave={mouseLeaveHandler}
@@ -125,20 +114,14 @@ const Header = () => {
           </motion.div>
         </div>
       </header>
+
       {/* mobile nav */}
-      {/* 
-        Mobile navigation panel
-        Slides in from right when mobileNav state is true
-        Uses Framer Motion for smooth slide animation
-        Fixed positioning covers entire viewport height
-        z-50 ensures it appears above header (z-40)
-      */}
       <motion.div
         initial={{ right: "-100%" }}
         animate={{ right: mobileNav ? 0 : "-100%" }}
-        className="fixed bg-primary top-0 bottom-0 right-0 w-[300px] xl:hidden z-50"
+        transition={{ type: "tween", duration: 0.3 }}
+        className="fixed bg-primary top-0 bottom-0 right-0 w-[300px] xl:hidden z-50 shadow-2xl"
       >
-        {/* Pass setMobileNav function to allow closing from inside MobileNav component */}
         <MobileNav setMobileNav={setMobileNav} />
       </motion.div>
     </>

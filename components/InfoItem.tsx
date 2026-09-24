@@ -18,19 +18,12 @@ type PropsType = {
 
 const InfoItem = ({ imgSrc, title, description }: PropsType) => {
   return (
-    <div className="flex items-start gap-4">
-      {/* icon */}
-      {/* 
-        Icon container - fixed size with Next.js Image using fill prop
-        fill prop makes image fill its parent container (36x36px)
-      */}
-      <div className="relative w-[36px] h-[36px]">
-        <Image src={imgSrc} fill alt="" />
+    <div className="flex items-start gap-4 text-start">
+      <div className="relative w-[32px] h-[32px] shrink-0 mt-1">
+        <Image src={imgSrc} fill alt="" className="object-contain" />
       </div>
-      {/* Content area with title and flexible description */}
-      <div className="pt-1 flex-1">
-        <h4 className="h4 mb-2">{title}</h4>
-        {/* description accepts ReactNode, allowing custom HTML structure */}
+      <div className="flex-1 text-start">
+        <h4 className="h4 mb-1 text-primary text-lg font-bold">{title}</h4>
         {description}
       </div>
     </div>

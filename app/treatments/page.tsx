@@ -16,93 +16,122 @@ import Image from "next/image";
 import TreatmentsItem from "@/components/TreatmentsItem";
 
 const Treatments = () => {
-  // Get cursor handlers for interactive hover effects
   const { mouseEnterHandler, mouseLeaveHandler } = useCursor();
 
   return (
     <motion.section
       initial={{ opacity: 0 }}
-      animate={{ opacity: 1, transition: { delay: 2 } }}
-      className="min-h-screen flex  items-center overflow-x-hidden"
+      animate={{ opacity: 1, transition: { delay: 1.2 } }}
+      className="min-h-screen flex items-center overflow-x-hidden"
     >
-      <div className="container mx-auto flex items-center pt-48 pb-12 xl:pt-32 xl:pb-0">
-        <div className="w-full h-full flex items-center justify-between">
-          {/* text */}
+      <div className="container mx-auto flex items-center pt-48 pb-16 xl:pt-32 xl:pb-0">
+        <div className="w-full h-full flex flex-col xl:flex-row items-center justify-between gap-12">
+          {/* Text Content */}
           <motion.div
-            initial={{ opacity: 0, x: -60 }}
+            initial={{ opacity: 0, x: 50 }}
             animate={{
               opacity: 1,
               x: 0,
-              transition: { delay: 2, duration: 0.8, ease: "easeInOut" },
+              transition: { delay: 1.4, duration: 0.8, ease: "easeInOut" },
             }}
             onMouseEnter={mouseEnterHandler}
             onMouseLeave={mouseLeaveHandler}
-            className="flex flex-col items-start xl:max-w-[650px] text-center xl:text-left mx-auto"
+            className="flex flex-col items-center xl:items-start xl:max-w-[650px] text-center xl:text-start mx-auto"
           >
-            <h2 className="h2 mb-6 mx-auto max-w-[540px] xl:max-w-none">
-              Indulge in our Luxurious Treatments
+            <div className="inline-flex items-center gap-2 bg-[#f0cfbc]/70 text-primary px-4 py-1.5 rounded-full text-xs font-semibold mb-4">
+              <span>תפריט הטיפולים שלנו</span>
+            </div>
+
+            <h2 className="h2 mb-6 mx-auto max-w-[540px] xl:max-w-none text-primary">
+              טיפולים יוקרתיים בהתאמה אישית
             </h2>
-            <p className="lead max-w-[600px] mx-auto xl:mx-0">
-              Tailored skincare solutions for a healthy complexion, offering customized
-              care for radiant skin
+
+            <p className="lead max-w-[600px] mx-auto xl:mx-0 text-primary/85 leading-relaxed">
+              בקליניקת Phoenix אנו מאמינים בשילוב מנצח בין רוגע עמוק, טכנולוגיות אסתטיקה מתקדמות ותוצאות נראות לעין.
             </p>
-            {/* items */}
-            {/* 
-              Treatments grid layout:
-              - 1 column on mobile (grid-cols-1)
-              - 2 columns on medium screens and up (md:grid-cols-2)
-            */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-[20px] mb-14 mx-auto xl:mx-0">
-              {/* item */}
-              {/* Each TreatmentsItem displays a treatment name and description */}
+
+            {/* Treatments Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12 mx-auto xl:mx-0 w-full">
               <TreatmentsItem
-                title="Classic Facial"
-                description="Deep cleansing, exfoliation and hydration for a refreshed complexion"
+                title="ספא ראש יפני (Japanese Head Spa)"
+                description="טקס יפני ייחודי הכולל עיסוי קרקפת עמוק, שטיפה במי גשם זורמים, הזנת סיב השערה וחוויית רוגע והפגת מתחים שאין שניה לה."
               />
+
               <TreatmentsItem
-                title="Chemical Peel"
-                description="Exfoliating treatment to improve skin texture and tone"
+                title="הסרת שיער בלייזר (Laser Hair Removal)"
+                description="טכנולוגיית לייזר מתקדמת ועוצמתית בסטנדרטים הגבוהים ביותר, ללא כאב, עם תוצאות חלקות ומהירות המותאמות במדויק לעורך."
               />
+
               <TreatmentsItem
-                title="Eyebrow Waxing/Shaping"
-                description="Deep cleansing, exfoliation and hydration for a refreshed complexion"
+                title="טיפולי פנים (Facial Treatments)"
+                description="טיפולי עור מתקדמים, ניקוי עמוק, פילינג עדין, החדרה של חומצות וחומרים פעילים למיצוק, זוהר ורענון המראה הטבעי."
               />
+
               <TreatmentsItem
-                title="HydraFacial"
-                description="Multi-step treatment for instant hydration and glow"
+                title="אסתטיקה וטיפוח משלים"
+                description="אבחון עור אישי ומקצועי, התאמת שגרת טיפוח ביתית מותאמת אישית וטיפולי זוהר ורענון לאירועים מיוחדים."
               />
             </div>
-            {/* btn */}
-            {/* Call-to-action button */}
-            <button className="btn mx-auto xl:mx-0">Discover more</button>
+
+            {/* CTA Button */}
+            <a
+              href="https://wa.me/972536100932"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn mx-auto xl:mx-0 shadow-lg"
+            >
+              קבעי תור
+            </a>
           </motion.div>
-          {/* image */}
-          {/* 
-            Treatment image - hidden on mobile, visible on desktop
-            Animates from right (x: 60) to center on load
-          */}
+
+          {/* Media / Visual Showcase */}
           <motion.div
-            initial={{ opacity: 0, x: 60 }}
+            initial={{ opacity: 0, x: -50 }}
             animate={{
               opacity: 1,
               x: 0,
-              transition: { delay: 2.4, duration: 0.8, ease: "easeInOut" },
+              transition: { delay: 1.6, duration: 0.8, ease: "easeInOut" },
             }}
             onMouseEnter={mouseEnterHandler}
             onMouseLeave={mouseLeaveHandler}
-            className="hidden xl:flex w-[384px] h-[534px] relative"
+            className="w-full xl:w-[420px] flex flex-col gap-4 items-center"
           >
-            {/* 
-              Next.js Image with fill prop for responsive sizing
-              Hidden on mobile (hidden xl:flex) to prioritize content
-            */}
-            <Image
-              src="/assets/treatments/img.jpg"
-              fill
-              alt=""
-              quality={100}
-              className="object-contain"
-            />
+            {/* Main Treatment / Instagram Preview Box */}
+            <div className="w-[320px] h-[440px] xl:w-[384px] xl:h-[500px] relative rounded-3xl overflow-hidden shadow-2xl bg-[#f0cfbc]/50 border-4 border-white/60">
+              {/* <!-- INSERT_INSTAGRAM_IMAGE_1 --> */}
+              {/* 
+                Swap this image with your Instagram media tag, photo, or video embed:
+                <img src="/your-instagram-photo-1.jpg" alt="ספא ראש יפני" className="w-full h-full object-cover" />
+              */}
+              <Image
+                src="/assets/treatments/img.jpg"
+                fill
+                alt="טיפולים בקליניקת פניקס"
+                quality={100}
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute bottom-4 right-4 left-4 text-white text-start">
+                <span className="text-xs uppercase tracking-wider text-accent font-semibold block">ספא ראש יפני</span>
+                <span className="text-lg font-bold font-primary">חוויה של רוגע ושלווה</span>
+              </div>
+            </div>
+
+            {/* Instagram Gallery Thumbnail Slots */}
+            <div className="grid grid-cols-3 gap-3 w-[320px] xl:w-[384px]">
+              {/* <!-- INSERT_INSTAGRAM_IMAGE_2 --> */}
+              <div className="aspect-square rounded-xl bg-[#e8cebf] relative overflow-hidden shadow-sm border border-white/50 flex items-center justify-center text-[10px] text-primary/70 font-semibold">
+                <span>לייזר מתקדם</span>
+              </div>
+              {/* <!-- INSERT_INSTAGRAM_IMAGE_3 --> */}
+              <div className="aspect-square rounded-xl bg-[#dfc3b2] relative overflow-hidden shadow-sm border border-white/50 flex items-center justify-center text-[10px] text-primary/70 font-semibold">
+                <span>טיפולי פנים</span>
+              </div>
+              {/* <!-- INSERT_INSTAGRAM_IMAGE_4 --> */}
+              <div className="aspect-square rounded-xl bg-[#e8cebf] relative overflow-hidden shadow-sm border border-white/50 flex items-center justify-center text-[10px] text-primary/70 font-semibold">
+                <span>זוהר וטיפוח</span>
+              </div>
+            </div>
           </motion.div>
         </div>
       </div>

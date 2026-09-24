@@ -15,85 +15,77 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { useCursor } from "@/context/CursorContext";
 
-// コンポネント
+// Components
 import ModalVideo from "@/components/ModalVideo";
 
-/**
- * Home Component - Landing page with hero section
- * 
- * Features:
- * - Animated text content with staggered delays
- * - Image that slides up from bottom
- * - Interactive elements that trigger custom cursor effects
- * - Responsive layout (mobile-first with xl: breakpoint)
- */
 const Home = () => {
-  // Extract cursor handlers from context to enable custom cursor on hover
   const { mouseEnterHandler, mouseLeaveHandler } = useCursor();
 
   return (
     <motion.section
       initial={{ opacity: 0 }}
-      animate={{ opacity: 1, transition: { delay: 2 } }}
-      className="min-h-screen flex items-center overflow-x-hidden"
+      animate={{ opacity: 1, transition: { delay: 1.2 } }}
+      className="min-h-screen flex items-center overflow-x-hidden relative"
     >
-      {/* Container with max-width and horizontal centering */}
-      <div className="container mx-auto">
+      {/* Hero Video / Background Placeholder Container */}
+      <div className="absolute inset-0 -z-10 bg-[#f7ebe1] overflow-hidden pointer-events-none opacity-60">
+        {/* <!-- INSERT_HERO_VIDEO_HERE --> */}
         {/* 
-          Responsive flex layout: 
-          - Column on mobile (flex-col)
-          - Row on extra-large screens (xl:flex-row)
+          Placeholder container for background video. 
+          Swap the fallback with your <video autoPlay loop muted playsInline src="..." /> tag here. 
         */}
-        <div className="flex flex-col xl:flex-row items-center h-full">
-          {/* text */}
-          {/* 
-            Text content area with slide-down animation
-            Animates from -100px above (y: -100) to final position (y: 0)
-            Delay ensures it animates after the page transition overlay completes
-          */}
+      </div>
+
+      <div className="container mx-auto relative z-10">
+        <div className="flex flex-col xl:flex-row items-center justify-between h-full pt-36 pb-12 xl:pt-28 xl:pb-0 gap-8">
+          {/* Text Content */}
           <motion.div
-            initial={{ opacity: 0, y: -100 }}
+            initial={{ opacity: 0, y: -60 }}
             animate={{
               opacity: 1,
               y: 0,
-              transition: { delay: 2, duration: 1, ease: "easeInOut" },
+              transition: { delay: 1.4, duration: 0.9, ease: "easeInOut" },
             }}
-            className="w-full text-center xl:text-left xl:w-[500px] pt-[120px]"
+            className="w-full text-center xl:text-start xl:max-w-[580px]"
           >
-            {/* 
-              Main heading with custom cursor interaction
-              onMouseEnter/onMouseLeave handlers change cursor appearance on hover
-            */}
+            {/* Tagline badge */}
+            <div className="inline-flex items-center gap-2 bg-[#f0cfbc]/70 text-primary px-4 py-1.5 rounded-full text-xs font-semibold mb-6 mx-auto xl:mx-0">
+              <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+              <span>פניקס • קליניקה לאסתטיקה וקוסמטיקה מתקדמת</span>
+            </div>
+
+            {/* Headline */}
             <motion.h1
               onMouseEnter={mouseEnterHandler}
               onMouseLeave={mouseLeaveHandler}
-              className="h1 mb-6"
+              className="h1 mb-6 text-primary tracking-tight"
             >
-              Natural Beauty <br /> Starts Here
+              פינוק מלכותי <br />
+              ומקצועיות ללא פשרות
             </motion.h1>
-            {/* Lead paragraph text with cursor interaction */}
+
+            {/* Subtitle */}
             <motion.p
               onMouseEnter={mouseEnterHandler}
               onMouseLeave={mouseLeaveHandler}
-              className="lead max-w-xl mx-auto"
+              className="lead max-w-xl mx-auto xl:mx-0 text-primary/85 text-lg leading-relaxed"
             >
-              Tailored skincare solutions for a healthy complexion, offering customized
-              care for radiant skin
+              היכנסי לחוויה יוקרתית של התחדשות ורוגע בדימונה: ספא ראש יפני אותנטי, הסרת שיער בלייזר בטכנולוגיה החדישה ביותר, וטיפולי פנים מתקדמים לעור זוהר ובריא.
             </motion.p>
-            {/* 
-              Button and video modal container
-              Responsive: stacked on mobile, side-by-side on desktop
-            */}
-            <div className="flex flex-col xl:flex-row items-center gap-6 max-w-max mx-auto xl:mx-0">
-              {/* CTA button with hover effect */}
-              <motion.button
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row items-center gap-6 max-w-max mx-auto xl:mx-0">
+              <motion.a
+                href="https://wa.me/972536100932"
+                target="_blank"
+                rel="noopener noreferrer"
                 onMouseEnter={mouseEnterHandler}
                 onMouseLeave={mouseLeaveHandler}
-                className="btn btn-lg"
+                className="btn btn-lg text-center shadow-lg"
               >
-                Book an appointment
-              </motion.button>
-              {/* Video modal trigger with cursor interaction */}
+                קבעי תור
+              </motion.a>
+
               <motion.div
                 onMouseEnter={mouseEnterHandler}
                 onMouseLeave={mouseLeaveHandler}
@@ -102,43 +94,35 @@ const Home = () => {
               </motion.div>
             </div>
           </motion.div>
-          {/* image */}
-          {/* 
-            Image container - flex-1 allows it to take remaining space
-            On mobile, this section is hidden to focus on text content
-          */}
-          <div className="flex-1">
-            {/* 
-              Hero image with slide-up animation
-              Animates from 100% below viewport (bottom: "-100%") to final position
-              Uses fixed positioning to keep it at bottom of viewport
-              Higher delay (2.4s) ensures it appears after text content
-            */}
+
+          {/* Visual / Hero Media Area */}
+          <div className="flex-1 flex justify-center xl:justify-end w-full max-w-[520px] xl:max-w-none">
             <motion.div
-              initial={{ opacity: 0, bottom: "-100%" }}
+              initial={{ opacity: 0, y: 60 }}
               animate={{
                 opacity: 1,
-                bottom: 0,
-                transition: { delay: 2.4, duration: 1.2, ease: "easeInOut" },
+                y: 0,
+                transition: { delay: 1.6, duration: 1, ease: "easeInOut" },
               }}
               onMouseEnter={mouseEnterHandler}
               onMouseLeave={mouseLeaveHandler}
-              className="hidden xl:flex fixed bottom-0"
+              className="relative w-full max-w-[420px] xl:max-w-[480px] aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl bg-[#eedfd5] border-4 border-white/60"
             >
-              {/* 
-                Next.js Image component provides:
-                - Automatic image optimization
-                - Lazy loading
-                - Responsive images
-                - Better performance than regular <img> tag
-              */}
+              {/* <!-- INSERT_HERO_VIDEO_HERE --> */}
               <Image
                 src="/assets/home/img.png"
-                width={864}
-                height={650}
-                quality={100}
-                alt=""
+                fill
+                priority
+                className="object-cover object-center"
+                alt="פניקס - קליניקה לאסתטיקה וקוסמטיקה"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/30 via-transparent to-transparent pointer-events-none" />
+              
+              {/* Floating feature pill */}
+              <div className="absolute bottom-6 right-6 left-6 bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-md border border-white/40 text-start">
+                <p className="text-xs text-accent font-semibold">דימונה • כיכר ז&apos;בוטינסקי 1</p>
+                <p className="text-sm font-bold text-primary">ספא ראש יפני • לייזר • טיפולי פנים</p>
+              </div>
             </motion.div>
           </div>
         </div>

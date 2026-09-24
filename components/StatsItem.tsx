@@ -24,18 +24,11 @@ type PropsType = {
 const StatsItem = ({ countNum, countText, text }: PropsType) => {
   return (
     <div className="text-center font-primary">
-      {/* 
-        Number display with CountUp animation
-        delay: 2.4s syncs with page transition timing
-        duration: 6s creates smooth counting animation
-      */}
-      <div className="text-[40px] text-accent mb-4">
-        <CountUp end={countNum} delay={2.4} duration={6} />
-        {/* Optional text suffix (e.g., "k+" for thousands, "%" for percentage) */}
-        <span>{countText}</span>
+      <div className="text-[36px] xl:text-[40px] font-bold text-accent mb-2 inline-flex items-center justify-center" dir="ltr">
+        <CountUp end={countNum} delay={1.4} duration={3} />
+        {countText && <span>{countText}</span>}
       </div>
-      {/* Description text */}
-      <p className="text-lg">{text}</p>
+      <p className="text-base text-primary/80 font-medium leading-snug">{text}</p>
     </div>
   );
 };

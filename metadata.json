@@ -1,0 +1,8 @@
+{
+  "name": "Phoenix Cosmetology",
+  "description": "פניקס - קליניקה לאסתטיקה וקוסמטיקה. פינוק מלכותי ומקצועיות ללא פשרות. ספא ראש יפני, הסרת שיער בלייזר וטיפולי פנים בדימונה.",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

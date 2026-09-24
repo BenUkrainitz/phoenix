@@ -9,110 +9,110 @@
 import { motion } from "framer-motion";
 import { useCursor } from "@/context/CursorContext";
 import Form from "@/components/Form";
-import Image from "next/image";
 import InfoItem from "@/components/InfoItem";
 
 const Contact = () => {
-  // Get cursor handlers for interactive hover effects
   const { mouseEnterHandler, mouseLeaveHandler } = useCursor();
 
   return (
     <motion.section
       initial={{ opacity: 0 }}
-      animate={{ opacity: 1, transition: { delay: 2 } }}
-      className="min-h-screen flex  items-center overflow-x-hidden"
+      animate={{ opacity: 1, transition: { delay: 1.2 } }}
+      className="min-h-screen flex items-center overflow-x-hidden"
     >
-      <div className="container mx-auto pt-48 pb-12 xl:pt-32 xl:pb-0">
-        {/* 
-          Responsive layout: 
-          - Stacks vertically on mobile with gap
-          - Side-by-side on desktop (xl:flex-row)
-        */}
-        <div className="flex flex-col gap-12 xl:flex-row h-full">
-          {/* text */}
-          {/* 
-            Contact information section
-            Animates from left (x: -60) to center on load
-            flex-1 allows it to take equal space with form on desktop
-          */}
+      <div className="container mx-auto pt-48 pb-16 xl:pt-32 xl:pb-0">
+        <div className="flex flex-col gap-12 xl:flex-row h-full items-start">
+          {/* Contact Details */}
           <motion.div
-            initial={{ opacity: 0, x: -60 }}
+            initial={{ opacity: 0, x: 50 }}
             animate={{
               opacity: 1,
               x: 0,
-              transition: { delay: 2, duration: 0.8, ease: "easeInOut" },
+              transition: { delay: 1.4, duration: 0.8, ease: "easeInOut" },
             }}
             onMouseEnter={mouseEnterHandler}
             onMouseLeave={mouseLeaveHandler}
-            className="flex-1 flex flex-col justify-center"
+            className="flex-1 flex flex-col justify-center text-start"
           >
-            <h3 className="h3 mb-3 text-center xl:text-left">Contact Info</h3>
-            {/* items */}
-            {/* 
-              Contact information items (address, phone, email)
-              Centered on mobile, left-aligned on desktop
-            */}
-            <div className="flex flex-col items-center xl:items-start gap-12">
-              {/* item */}
-              {/* 
-                InfoItem components display contact information with icons
-                description prop accepts ReactNode, allowing custom HTML structure
-              */}
+            <div className="inline-flex items-center gap-2 bg-[#f0cfbc]/70 text-primary px-4 py-1.5 rounded-full text-xs font-semibold mb-4 w-max">
+              <span>יצירת קשר ותיאום תורים</span>
+            </div>
+
+            <h3 className="h3 mb-4 text-primary">פרטי התקשרות והגעה</h3>
+            <p className="lead max-w-md text-primary/80 mb-8 leading-relaxed">
+              נשמח לארח אותך בקליניקה שלנו בדימונה לחוויית טיפוח מלכותית ומרגיעה. צרי קשר לתיאום תור או ייעוץ.
+            </p>
+
+            <div className="flex flex-col items-start gap-8">
+              {/* Address */}
               <InfoItem
                 imgSrc="/assets/contact/pin.svg"
-                title="Address"
+                title="כתובת הקליניקה"
                 description={
-                  <p className="leading-relaxed">
-                    123/45 Elm St, Suite 800 <br />
-                    Los Angels, CA 90012
+                  <p className="leading-relaxed text-primary/80 font-medium">
+                    כיכר ז&apos;בוטינסקי 1, דימונה
+                    <br />
+                    <span className="text-xs text-primary/60">גישה נוחה וחניה בקרבת מקום</span>
                   </p>
                 }
               />
-              {/* Phone information with multiple lines */}
+
+              {/* Phone */}
               <InfoItem
                 imgSrc="/assets/contact/phone.svg"
-                title="Phone number"
-                description={
-                  <div className="pt-1 flex-1">
-                    <p>Phone: +99(0) 999 333 667</p>
-                    <p>Fax: +99(0) 999 322 678</p>
-                  </div>
-                }
-              />
-              {/* Email addresses displayed in a column */}
-              <InfoItem
-                imgSrc="/assets/contact/email.svg"
-                title="Email address"
+                title="טלפון ו-WhatsApp"
                 description={
                   <div className="flex flex-col gap-1">
-                    <p>info@youremail.com</p>
-                    <p>support@youremail.com</p>
+                    <a
+                      href="tel:0536100932"
+                      dir="ltr"
+                      className="text-primary hover:text-accent font-semibold transition-colors text-start"
+                    >
+                      053-6100932
+                    </a>
+                    <a
+                      href="https://wa.me/972536100932"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs text-accent font-bold hover:underline"
+                    >
+                      לחצי כאן לשליחת הודעה בוואטסאפ
+                    </a>
                   </div>
                 }
               />
+
+              {/* Direct Booking CTA */}
+              <div className="pt-2">
+                <a
+                  href="https://wa.me/972536100932"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn shadow-lg"
+                >
+                  קבעי תור
+                </a>
+              </div>
             </div>
           </motion.div>
-          {/* form */}
-          {/* 
-            Contact form section
-            Animates from right (x: 60) to center on load
-            Slightly delayed (2.4s) to create staggered effect
-          */}
+
+          {/* Form */}
           <motion.div
-            initial={{ opacity: 0, x: 60 }}
+            initial={{ opacity: 0, x: -50 }}
             animate={{
               opacity: 1,
               x: 0,
-              transition: { delay: 2.4, duration: 0.8, ease: "easeInOut" },
+              transition: { delay: 1.6, duration: 0.8, ease: "easeInOut" },
             }}
             onMouseEnter={mouseEnterHandler}
             onMouseLeave={mouseLeaveHandler}
-            className="flex-1"
+            className="flex-1 w-full"
           >
-            {/* Form container with background color and padding */}
-            <div className="bg-[#f0cfbc] w-full max-w-[580px] gap-4 p-10 mx-auto xl:mx-0">
-              <h3 className="h3 mb-8 text-center">Get in touch</h3>
-              {/* Contact form component */}
+            <div className="bg-[#f0cfbc]/90 rounded-3xl shadow-xl w-full max-w-[580px] p-8 xl:p-10 mx-auto xl:mx-0 border border-white/50">
+              <h3 className="h3 mb-2 text-primary text-center">השאירי פרטים</h3>
+              <p className="text-sm text-primary/75 text-center mb-6">
+                מלאי את הפרטים ונחזור אלייך בהקדם לתיאום הטיפול המושלם
+              </p>
               <Form />
             </div>
           </motion.div>

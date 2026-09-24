@@ -10,19 +10,19 @@
 const links = [
   {
     href: "/",
-    name: "Home",
-  },
-  {
-    href: "/about",
-    name: "About",
+    name: "בית",
   },
   {
     href: "/treatments",
-    name: "Treatments",
+    name: "טיפולים",
+  },
+  {
+    href: "/about",
+    name: "אודות",
   },
   {
     href: "/contact",
-    name: "Contact",
+    name: "צור קשר",
   },
 ];
 

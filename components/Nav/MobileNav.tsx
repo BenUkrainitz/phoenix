@@ -11,7 +11,6 @@
  * @param setMobileNav - Function to close the mobile navigation panel
  */
 "use client";
-import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { IoCloseOutline } from "react-icons/io5";
@@ -19,43 +18,56 @@ import { links } from "@/utils/links";
 import Socials from "../Socials";
 
 type PropsType = {
-  setMobileNav: React.Dispatch<React.SetStateAction<boolean>>; // Function to update mobile nav visibility state
+  setMobileNav: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const MobileNav = ({ setMobileNav }: PropsType) => {
-  // Get current pathname to highlight active link
   const pathname = usePathname();
 
   return (
-    <nav className="relative flex flex-col justify-between h-full p-8">
-      {/* Close button - clicking sets mobileNav to false, closing the panel */}
-      <div
-        className="cursor-pointer text-accent"
-        onClick={() => setMobileNav(false)}
-      >
-        <IoCloseOutline className="text-4xl" />
+    <nav className="relative flex flex-col justify-between h-full p-8 text-start">
+      {/* Close button */}
+      <div className="flex justify-between items-center mb-4">
+        <span className="text-white font-primary font-bold text-xl tracking-wider">PHOENIX</span>
+        <button
+          className="cursor-pointer text-accent p-1"
+          onClick={() => setMobileNav(false)}
+          aria-label="סגור תפריט"
+        >
+          <IoCloseOutline className="text-4xl" />
+        </button>
       </div>
-      {/* 
-        Navigation links list
-        Vertical layout with large gap between items
-        Active link highlighted with bottom border
-        max-w-max mx-auto centers each link horizontally
-      */}
-      <ul className="flex flex-col gap-10 text-white text-xl">
+
+      {/* Navigation links */}
+      <ul className="flex flex-col gap-8 text-white text-xl my-auto">
         {links.map((link, index) => (
-          <Link
-            href={link.href}
-            key={index}
-            className={`${
-              pathname === link.href && "border-b-2 border-accent-100"
-            } uppercase max-w-max mx-auto`}
-          >
-            {link.name}
-          </Link>
+          <li key={index} className="text-center">
+            <Link
+              href={link.href}
+              onClick={() => setMobileNav(false)}
+              className={`${
+                pathname === link.href && "text-accent font-semibold border-b-2 border-accent pb-1"
+              } transition-colors hover:text-accent`}
+            >
+              {link.name}
+            </Link>
+          </li>
         ))}
       </ul>
-      {/* Social media links at bottom of navigation panel */}
-      <Socials containerStyle="text-white text-lg flex gap-6 justify-center" />
+
+      {/* Action and Socials */}
+      <div className="flex flex-col gap-6 items-center">
+        <a
+          href="https://wa.me/972536100932"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => setMobileNav(false)}
+          className="btn w-full !min-w-0 text-center"
+        >
+          קבעי תור
+        </a>
+        <Socials containerStyle="text-white text-lg flex gap-6 justify-center" />
+      </div>
     </nav>
   );
 };

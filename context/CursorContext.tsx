@@ -27,7 +27,7 @@ type CursorContextType = {
 };
 const CursorContext = createContext({} as CursorContextType);
 
-const CursorProvider = ({ children }: { children: React.ReactNode[] }) => {
+const CursorProvider = ({ children }: { children: React.ReactNode }) => {
   // Cursor state - size and background color
   const [cursor, setCursor] = useState({ size: 30, background: "#473936" });
   // Track if cursor is hovering over an interactive element

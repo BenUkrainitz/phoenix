@@ -14,102 +14,86 @@ import Image from "next/image";
 import StatsItem from "@/components/StatsItem";
 
 const About = () => {
-  // Get cursor handlers from context for interactive hover effects
   const { mouseEnterHandler, mouseLeaveHandler } = useCursor();
 
   return (
     <motion.section
       initial={{ opacity: 0 }}
-      animate={{ opacity: 1, transition: { delay: 2 } }}
+      animate={{ opacity: 1, transition: { delay: 1.2 } }}
       className="min-h-screen flex items-center overflow-x-hidden"
     >
-      {/* Container with responsive padding - accounts for fixed header on mobile */}
-      <div className="container mx-auto flex items-center pt-48 pb-12 xl:pt-32 xl:pb-0">
-        {/* 
-          Responsive layout: 
-          - Stacks vertically on mobile (flex-col)
-          - Side-by-side on desktop (xl:flex-row)
-          - justify-between creates space between image and text on desktop
-        */}
-        <div className="w-full h-full flex flex-col xl:flex-row items-center justify-between">
-          {/* image */}
-          {/* 
-            Image container with slide-in animation from left
-            Uses Next.js Image with fill prop for responsive sizing
-            priority flag ensures image loads immediately (above the fold)
-          */}
+      <div className="container mx-auto flex items-center pt-48 pb-16 xl:pt-32 xl:pb-0">
+        <div className="w-full h-full flex flex-col xl:flex-row items-center justify-between gap-12">
+          {/* Media / Image */}
           <motion.div
             onMouseEnter={mouseEnterHandler}
             onMouseLeave={mouseLeaveHandler}
-            initial={{ opacity: 0, x: -60 }}
+            initial={{ opacity: 0, x: 50 }}
             animate={{
               opacity: 1,
               x: 0,
-              transition: { delay: 2, duration: 0.8, ease: "easeInOut" },
+              transition: { delay: 1.4, duration: 0.8, ease: "easeInOut" },
             }}
-            className="relative w-[304px] h-[423px] xl:w-[384px] xl:h-[534px] mb-8 xl:mb-0"
+            className="relative w-[304px] h-[423px] xl:w-[384px] xl:h-[534px] rounded-3xl overflow-hidden shadow-2xl bg-[#eedfd5] border-4 border-white/60 mb-8 xl:mb-0"
           >
-            {/* 
-              Next.js Image with fill prop:
-              - fill: Makes image fill its parent container
-              - object-contain: Ensures image maintains aspect ratio within container
-              - priority: Preloads image for better performance (LCP optimization)
-            */}
+            {/* <!-- INSERT_INSTAGRAM_IMAGE_ABOUT --> */}
             <Image
               src="/assets/about/img.jpg"
               fill
-              alt=""
+              alt="פניקס - קליניקה לאסתטיקה וקוסמטיקה"
               quality={100}
               priority
-              className="object-contain"
+              className="object-cover"
             />
+            <div className="absolute inset-0 bg-gradient-to-t from-primary/30 via-transparent to-transparent pointer-events-none" />
           </motion.div>
-          {/* text */}
-          {/* 
-            Text content with slide-in animation from right
-            Slightly delayed (2.4s) to create staggered effect after image
-          */}
+
+          {/* Text Content */}
           <motion.div
             onMouseEnter={mouseEnterHandler}
             onMouseLeave={mouseLeaveHandler}
-            initial={{ opacity: 0, x: 60 }}
+            initial={{ opacity: 0, x: -50 }}
             animate={{
               opacity: 1,
               x: 0,
-              transition: { delay: 2.4, duration: 0.8, ease: "easeInOut" },
+              transition: { delay: 1.6, duration: 0.8, ease: "easeInOut" },
             }}
-            className="flex flex-col items-start xl:max-w-[650px] text-center xl:text-left mx-auto xl:mx-0"
+            className="flex flex-col items-center xl:items-start xl:max-w-[650px] text-center xl:text-start mx-auto xl:mx-0"
           >
-            {/* Main heading - responsive text alignment */}
-            <h2 className="h2 mb-6 mx-auto max-w-[540px] xl:max-w-none">
-              Committed to Your Skin&apos;s Health and Beauty
+            <div className="inline-flex items-center gap-2 bg-[#f0cfbc]/70 text-primary px-4 py-1.5 rounded-full text-xs font-semibold mb-4">
+              <span>הסיפור של פניקס</span>
+            </div>
+
+            <h2 className="h2 mb-6 mx-auto max-w-[540px] xl:max-w-none text-primary">
+              פינוק מלכותי ומקצועיות ללא פשרות
             </h2>
-            {/* Description text */}
-            <p className="lead max-w-[600px] mx-auto xl:mx-0">
-              Tailored skincare solutions for a healthy complexion, offering customized
-              care for radiant skin
+
+            <p className="lead max-w-[600px] mx-auto xl:mx-0 text-primary/85 leading-relaxed">
+              קליניקת Phoenix Cosmetology נולדה מתוך תשוקה לאסתטיקה מוקפדת, בריאות העור ומתן מענה אישי ומדויק לכל לקוחה. אנו מביאים לדימונה את הבשורות המתקדמות ביותר בעולם הטיפוח – מטקסי ספא ראש יפני מסורתיים ועד טיפולי לייזר ופנים מהשורה הראשונה.
             </p>
-            {/* items */}
-            {/* 
-              Statistics grid - 3 columns displaying key metrics
-              Each StatsItem component uses CountUp for animated number counting
-            */}
-            <div className="grid grid-cols-3 gap-[30px] mb-14 mx-auto xl:mx-0">
+
+            {/* Statistics grid */}
+            <div className="grid grid-cols-3 gap-6 mb-12 mx-auto xl:mx-0 w-full max-w-[500px]">
               <div>
-                <StatsItem countNum={13} text="Years On Market" />
+                <StatsItem countNum={10} countText="+" text="שנות ניסיון" />
               </div>
               <div>
-                {/* countText prop allows adding unit (k+ for thousands) */}
-                <StatsItem countNum={35} countText="k+" text="Happy Clients" />
+                <StatsItem countNum={100} countText="%" text="התאמה אישית" />
               </div>
               <div>
-                {/* countText prop adds percentage symbol */}
-                <StatsItem countNum={97} countText="%" text="Natural Ingredients" />
+                <StatsItem countNum={98} countText="%" text="לקוחות מרוצות" />
               </div>
             </div>
-            {/* btn */}
-            {/* Call-to-action button - centered on mobile, left-aligned on desktop */}
-            <button className="btn mx-auto xl:mx-0">Contact Us</button>
+
+            {/* Call-to-action button */}
+            <a
+              href="https://wa.me/972536100932"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn mx-auto xl:mx-0 shadow-lg"
+            >
+              קבעי תור
+            </a>
           </motion.div>
         </div>
       </div>
